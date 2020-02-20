@@ -1,0 +1,33 @@
+language: node_js
+
+node_js: stable  # 要安装的node版本为当前的稳定版
+
+cache:
+  directories:
+  - node_modules # 要缓存的文件夹
+
+install:
+  - npm install
+
+script:
+  - cd themes/sagiri/
+  - npm install
+  - cd ../../
+  - hexo g
+
+after_script:
+  - cd ./public
+  - git init
+  - git config user.name "1574242600"
+  - git config user.email "1574242600@qq.com"
+  - git add . 
+  - git commit -m "cl"
+  - git push --force --quiet "https://${GITHUB_REPO_TOKEN}@${GH_REF}" master:master
+
+branches:
+  only:
+    - hexo
+
+env:
+ global:
+   - GH_REF: github.com/1574242600/1574242600.github.io.git
