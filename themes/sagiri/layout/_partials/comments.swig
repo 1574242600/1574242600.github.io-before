@@ -1,12 +1,7 @@
 {% if page.comments %}
 
     <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <div class="disqus-loading">
-          <strong>gitment 加载中...</strong>
-          <p>如果长时间无法加载，请针对 api.github.com 启用代理</p>
-        </div>
-      </div>
+
     </div>
 
 <link rel="stylesheet" href="https://neurax.obs.cn-north-1.myhuaweicloud.com/css/default.css">
@@ -33,7 +28,7 @@ const myTheme = {
         },
         theme: myTheme,
     })
-    gitment.render('container')
+    gitment.render('comments')
 </script>
 
 {% endif %}
