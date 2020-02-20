@@ -65,9 +65,9 @@ index_with_subtitle: false
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, question icon will be loaded.
 menu:
   主页: / || home
-  archives: /archives/|| archive
-  友情链接: /friends/|| mars
-  留言板: /message/|| pencil
+  archives: /archives/ || archive
+  友情链接: /friends/ || mars
+  留言板: /message/ || pencil
 
 # Enable/Disable menu icons.
 menu_icons:
