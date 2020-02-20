@@ -13,6 +13,7 @@ script:
   - cd themes/sagiri/
   - npm install
   - cd ../../
+  - hexo clean
   - hexo g
 
 after_script:
