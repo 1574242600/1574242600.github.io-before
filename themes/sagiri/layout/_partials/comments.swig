@@ -21,7 +21,7 @@ const myTheme = {
 }
     var gitment = new Gitment({
         owner: '1574242600',
-        repo: 'Nworm',
+        repo: '1574242600.github.io',
         oauth: {
             client_id: '3d44c23fd064713afe91',
             client_secret: 'd463606550d3b7649e6e645659431892a2b15ac0',
