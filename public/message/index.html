@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link href="https://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+<link href="//fonts.cat.net/css?family=Sigmar One:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css" />
+<link href="https://cdn.bootcss.com/social-share.js/1.0.9/css/share.min.css" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=0.0.4" rel="stylesheet" type="text/css" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=0.0.4">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=0.0.4">
+<link rel="mask-icon" href="/images/logo.svg?v=0.0.4" color="#222">
+<meta name="keywords" content="Nworm,DIYgod,blog" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="留言板">
+<meta property="og:site_name" content="Nworm">
+<meta property="article:published_time" content="2020-02-20T07:41:14.267Z">
+<meta property="article:modified_time" content="2020-02-20T07:46:27.905Z">
+<meta property="article:author" content="nworm">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '0.0.4',
+    sidebar: {"position":"right","display":"always","offset":52,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    since: '6/21/2019 11:30:00',
+    onlineAPI: '',
+    site: {
+      title: 'Nworm',
+      subtitle: '',
+      author: 'nworm'
+    },
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    leancloud: {
+      enable: false,
+      appID: '',
+      appKey: ''
+    },
+    favicon: {
+      visibilitychange: true,
+      narmal: '/images/favicon.ico',
+      hidden: '/images/failure.ico',
+      show_text: 'awhl！',
+      hide_text: 'awsl！'
+    }
+  };
+</script>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+<title>留言板 | Nworm</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0">
+<style type="text/css">
+.noties {
+  position: fixed;
+  max-width: 80%;
+  z-index: 9999
+}
+
+.noties:empty {
+  display: none
+}
+
+.noties-top-right {
+  right: 0;
+  top: 20px
+}
+
+.noties-top-right .notie {
+  -ms-transform: translateX(100%);
+      transform: translateX(100%)
+}
+
+.noties-top-right .notie.notie-shown {
+  -ms-transform: translateX(-20px);
+      transform: translateX(-20px)
+}
+
+.noties-top-left {
+  left: 0;
+  top: 20px
+}
+
+.noties-top-left .notie {
+  -ms-transform: translateX(-100%);
+      transform: translateX(-100%)
+}
+
+.noties-top-left .notie.notie-shown {
+  -ms-transform: translateX(20px);
+      transform: translateX(20px)
+}
+
+.noties-bottom-right {
+  right: 0;
+  bottom: 20px
+}
+
+.noties-bottom-right .notie {
+  -ms-transform: translateX(100%);
+      transform: translateX(100%)
+}
+
+.noties-bottom-right .notie.notie-shown {
+  -ms-transform: translateX(-20px);
+      transform: translateX(-20px)
+}
+
+.noties-bottom-left {
+  left: 0;
+  bottom: 20px
+}
+
+.noties-bottom-left .notie {
+  -ms-transform: translateX(-100%);
+      transform: translateX(-100%)
+}
+
+.noties-bottom-left .notie.notie-shown {
+  -ms-transform: translateX(20px);
+      transform: translateX(20px)
+}
+
+.noties-top-center {
+  left: 50%;
+  -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+  top: 0
+}
+
+.noties-top-center .notie {
+  -ms-transform: translateY(-100%);
+      transform: translateY(-100%)
+}
+
+.noties-top-center .notie.notie-shown {
+  -ms-transform: translateY(20px);
+      transform: translateY(20px)
+}
+
+.noties-bottom-center {
+  left: 50%;
+  -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+  bottom: 0
+}
+
+.noties-bottom-center .notie {
+  -ms-transform: translateY(100%);
+      transform: translateY(100%)
+}
+
+.noties-bottom-center .notie.notie-shown {
+  -ms-transform: translateY(-20px);
+      transform: translateY(-20px)
+}
+
+.notie {
+  background-color: #ddd;
+  opacity: 0;
+  transition: transform .3s, opacity .3s;
+  border: 1px solid #ddd;
+  font: 14px/1.4 Helvetica, serif;
+  word-wrap: break-word
+}
+
+.notie:not(:last-child) {
+  margin-bottom: 10px
+}
+
+.notie.notie-auto-hide-disabled {
+  cursor: pointer
+}
+
+.notie.notie-shown {
+  opacity: 1
+}
+
+.notie .notie-body {
+  padding: 10px 12px
+}
+
+.notie .notie-svg {
+  height: 23px;
+  display: block;
+  float: left
+}
+
+.notie .notie-text {
+  display: block;
+  padding-left: 30px;
+  padding-top: 2px
+}
+
+.notie svg {
+  height: 23px;
+  width: 23px
+}
+
+.notie.notie-info {
+  background-color: #C6E4F4;
+  border-color: #A9D3EB;
+  color: #477DAC;
+
+  a {
+    color: #477DAC
+  }
+}
+
+.notie.notie-error {
+  background-color: #EAC1BD;
+  border-color: #D7A9A6;
+  color: #AB2925;
+
+  a {
+    color: #AB2925
+  }
+}
+
+.notie.notie-success {
+  background-color: #D9F1CF;
+  border-color: #C8E1BF;
+  color: #748C6C;
+
+  a {
+    color: #748C6C
+  }
+}
+
+.notie.notie-warning {
+  background-color: #F7F2CF;
+  border-color: #E8E2B2;
+  color: #9C7D45;
+
+  a {
+    color: #9C7D45
+  }
+}
+</style><style type="text/css">.fancybox-margin{margin-right:17px;}</style><style type="text/css">.noties {
+  position: fixed;
+  max-width: 80%;
+  z-index: 9999
+}
+
+.noties:empty {
+  display: none
+}
+
+.noties-top-right {
+  right: 0;
+  top: 20px
+}
+
+.noties-top-right .notie {
+  -ms-transform: translateX(100%);
+      transform: translateX(100%)
+}
+
+.noties-top-right .notie.notie-shown {
+  -ms-transform: translateX(-20px);
+      transform: translateX(-20px)
+}
+
+.noties-top-left {
+  left: 0;
+  top: 20px
+}
+
+.noties-top-left .notie {
+  -ms-transform: translateX(-100%);
+      transform: translateX(-100%)
+}
+
+.noties-top-left .notie.notie-shown {
+  -ms-transform: translateX(20px);
+      transform: translateX(20px)
+}
+
+.noties-bottom-right {
+  right: 0;
+  bottom: 20px
+}
+
+.noties-bottom-right .notie {
+  -ms-transform: translateX(100%);
+      transform: translateX(100%)
+}
+
+.noties-bottom-right .notie.notie-shown {
+  -ms-transform: translateX(-20px);
+      transform: translateX(-20px)
+}
+
+.noties-bottom-left {
+  left: 0;
+  bottom: 20px
+}
+
+.noties-bottom-left .notie {
+  -ms-transform: translateX(-100%);
+      transform: translateX(-100%)
+}
+
+.noties-bottom-left .notie.notie-shown {
+  -ms-transform: translateX(20px);
+      transform: translateX(20px)
+}
+
+.noties-top-center {
+  left: 50%;
+  -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+  top: 0
+}
+
+.noties-top-center .notie {
+  -ms-transform: translateY(-100%);
+      transform: translateY(-100%)
+}
+
+.noties-top-center .notie.notie-shown {
+  -ms-transform: translateY(20px);
+      transform: translateY(20px)
+}
+
+.noties-bottom-center {
+  left: 50%;
+  -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+  bottom: 0
+}
+
+.noties-bottom-center .notie {
+  -ms-transform: translateY(100%);
+      transform: translateY(100%)
+}
+
+.noties-bottom-center .notie.notie-shown {
+  -ms-transform: translateY(-20px);
+      transform: translateY(-20px)
+}
+
+.notie {
+  background-color: #ddd;
+  opacity: 0;
+  transition: transform .3s, opacity .3s;
+  border: 1px solid #ddd;
+  font: 14px/1.4 Helvetica, serif;
+  word-wrap: break-word
+}
+
+.notie:not(:last-child) {
+  margin-bottom: 10px
+}
+
+.notie.notie-auto-hide-disabled {
+  cursor: pointer
+}
+
+.notie.notie-shown {
+  opacity: 1
+}
+
+.notie .notie-body {
+  padding: 10px 12px
+}
+
+.notie .notie-svg {
+  height: 23px;
+  display: block;
+  float: left
+}
+
+.notie .notie-text {
+  display: block;
+  padding-left: 30px;
+  padding-top: 2px
+}
+
+.notie svg {
+  height: 23px;
+  width: 23px
+}
+
+.notie.notie-info {
+  background-color: #C6E4F4;
+  border-color: #A9D3EB;
+  color: #477DAC;
+
+  a {
+    color: #477DAC
+  }
+}
+
+.notie.notie-error {
+  background-color: #EAC1BD;
+  border-color: #D7A9A6;
+  color: #AB2925;
+
+  a {
+    color: #AB2925
+  }
+}
+
+.notie.notie-success {
+  background-color: #D9F1CF;
+  border-color: #C8E1BF;
+  color: #748C6C;
+
+  a {
+    color: #748C6C
+  }
+}
+
+.notie.notie-warning {
+  background-color: #F7F2CF;
+  border-color: #E8E2B2;
+  color: #9C7D45;
+
+  a {
+    color: #9C7D45
+  }
+}
+</style><style type="text/css">.fancybox-margin{margin-right:17px;}</style></head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><nav class="site-nav head-animated headroom--not-bottom slideDown headroom--top">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-友情链接">
+          <a href="/friends/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-mars"></i> <br>
+            
+            友情链接
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-留言板">
+          <a href="/message/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br>
+            
+            留言板
+          </a>
+        </li>
+      
+
+      
+      <li class="menu-item search">
+          <form class="search-form">
+            <input name="keyword" type="text" class="search-input" placeholder="站内搜索">
+            <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
+          </form>
+      </li>
+    </ul>
+  
+
+  
+</nav>
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+ </div>
+    </div></header>
+
+    <main id="main" class="main">
+      <div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="post posts-expand"><div class="post-block page"><header class="post-header"><h1 class="post-title" itemprop="name headline">留言板</h1></header><div class="post-body"><p><strong>这里是你畅所欲言的地方，可以咨询，可以交流，可以饰演暴躁老哥，甚至还可以搞黄色</strong></p></div></div></div></div><div class="comments" id="comments"></div><script type="text/javascript">window.DISQUS=null,new DisqusJS({shortname:"diygod-me",siteName:"Hi, DIYgod",identifier:"message/index.html",url:"https://diygod.me/message/index.html",api:"https://disqus.diygod.me/api/",apikey:"h403RnxQYBk2VylgLZwxodAtYOEL9bzgfhpcc8AZEU0EXn9cEWUoTwrgL3VB5tvj",admin:"DIYgod",adminLabel:"妹抖"})</script></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner affix-top" style="">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview" style="max-height: 325px;">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/card.jpg" alt="nworm">
+            
+              <p class="site-author-name" itemprop="name">nworm</p>
+              <p class="site-description motion-element" itemprop="description">你能抓到我么？</p>
+          </div>
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/1574242600" target="_blank" title="GitHub" data-balloon="GitHub" data-balloon-pos="up">
+                    
+                      <i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+            
+          </div>
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.png" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside></div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-image"></div>
+      <div class="footer-inner">
+
+
+<p>© <span itemprop="copyrightYear">2020</span> Nworm.
+    由 <a href="https://hexo.io/" target="_blank" class="external" rel="nofollow">Hexo</a> 强力驱动.
+    Theme By <a href="https://github.com/DIYgod/hexo-theme-sagiri" target="_blank" class="external" rel="nofollow">Sagiri</a> v0.0.4.
+    <a href="/sitemap.xml" target="_blank">站点地图</a>
+</p>
+<p>Made with by <span class="author" itemprop="copyrightHolder">nworm</span>. </p>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top" style="top: -900px;">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    <canvas id="evanyou" width="1440" height="509"></canvas>
+
+    
+
+  </div>
+
+  <script type="text/javascript" src="/js/sagiri.min.js?v=0.0.4"></script>
+
+  
+
+
+
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+
+<!----><!----></body></html>

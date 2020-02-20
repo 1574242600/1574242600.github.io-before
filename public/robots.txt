@@ -1,0 +1,4 @@
+User-agent: PiplBot
+Disallow: /
+Sitemap: https://nworm.icu/sitemaps.xml
+Sitemap: https://nworm.icu/sitemap.xml
