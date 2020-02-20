@@ -6,6 +6,9 @@ cache:
   directories:
   - node_modules # 要缓存的文件夹
 
+before_install:
+  - export TZ='Asia/Shanghai'
+    
 install:
   - npm install
 
@@ -17,12 +20,18 @@ script:
   - hexo g
 
 after_script:
+  - git clone https://${GH_REF} .deploy_git
+  - cd .deploy_git
+  - git checkout master
+  - cd ../
+  - mv .deploy_git/.git/ ./public/
+  - mv .deploy_git/message/ ./public/message/
+  - mv .deploy_git/friends/ ./public/friends/
   - cd ./public
-  - git init
   - git config user.name "1574242600"
   - git config user.email "1574242600@qq.com"
   - git add . 
-  - git commit -m "cl"
+  - git commit -m "Travis CI Auto Builder at `date +"%Y-%m-%d %H:%M"`"
   - git push --force --quiet "https://${GITHUB_REPO_TOKEN}@${GH_REF}" master:master
 
 branches:
