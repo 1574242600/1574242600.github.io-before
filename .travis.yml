@@ -27,11 +27,12 @@ after_script:
   - mv .deploy_git/.git/ ./public/
   - mv .deploy_git/message/ ./public/message/
   - mv .deploy_git/friends/ ./public/friends/
+  - mv .deploy_git/sitemaps.xml ./public/sitemaps.xml
   - cd ./public
   - git config user.name "1574242600"
   - git config user.email "1574242600@qq.com"
   - git add . 
-  - git commit -m "Travis CI Auto Builder at `date +"%Y-%m-%d %H:%M"`"
+  - git commit -m "Travis CI 自动生成在 `date +"%Y-%m-%d %H:%M"`"
   - git push --force --quiet "https://${GITHUB_REPO_TOKEN}@${GH_REF}" master:master
 
 branches:
