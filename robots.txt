@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nworm.icu/sitemaps.xml
+Sitemap: https://nworm.icu/sitemap.xml
