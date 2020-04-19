@@ -300,6 +300,288 @@
   
   
   <div class="post-date">
+			<div class="post-month">04月</div>
+			<div class="post-day">10</div>
+	</div>
+  
+
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://nworm.icu/2020/04/10/nodejs-http206/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nworm">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/DIYgod.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nworm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/10/nodejs-http206/" itemprop="url">[nodejs]koa框架 206 Partial Content</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-10T12:40:00+08:00">
+                2020-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>cnm，为什么koa它不直接支持206  </p>
+<h2 id="206-Partial-Content-是个什么玩意？"><a href="#206-Partial-Content-是个什么玩意？" class="headerlink" title="206 Partial Content 是个什么玩意？"></a>206 Partial Content 是个什么玩意？</h2><blockquote>
+<p>HTTP 206 Partial Content 成功状态响应代码表示请求已成功，并且主体包含所请求的数据区间，该数据区间是在请求的 Range 首部指定的。</p>
+<p>如果只包含一个数据区间，那么整个响应的 Content-Type 首部的值为所请求的文件的类型，同时包含  Content-Range 首部。</p>
+<p>如果包含多个数据区间，那么整个响应的  Content-Type  首部的值为 multipart/byteranges ，其中一个片段对应一个数据区间，并提供  Content-&gt; Range 和 Content-Type  描述信息。</p>
+<p> <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status/206" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status/206</a></p>
+</blockquote>
+<p>简单来说，就是获取服务端上，一个文件的部分内容，HTTP断点续传就是依赖的这玩意<br>注：本文并未实现  206 Partial Content的全部功能</p>
+<h2 id="头示例"><a href="#头示例" class="headerlink" title="头示例"></a>头示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;localVideo&#x2F;?token&#x3D;14c422b3623a69dbc831c4469794e7a2 HTTP&#x2F;1.1</span><br><span class="line">Host: 127.0.0.1:3000</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko&#x2F;20100101 Firefox&#x2F;75.0</span><br><span class="line">Accept: video&#x2F;webm,video&#x2F;ogg,video&#x2F;*;q&#x3D;0.9,application&#x2F;ogg;q&#x3D;0.7,audio&#x2F;*;q&#x3D;0.6,*&#x2F;*;q&#x3D;0.5</span><br><span class="line">Range: bytes&#x3D;0-</span><br><span class="line">Connection: keep-alive</span><br></pre></td></tr></table></figure>
+<h3 id="Range-字节数（bytes）-开始-结束"><a href="#Range-字节数（bytes）-开始-结束" class="headerlink" title="Range: 字节数（bytes）=(开始)-(结束)"></a>Range: 字节数（bytes）=(开始)-(结束)</h3><p>这是浏览器告知服务器所需分部分内容范围的消息头。 注意开始和结束位置是都包括在内的，这个头也只发送一个位置，其含义如下:  </p>
+<ul>
+<li>如果只发送开始位置，服务器会返回从声明的开始位置到服务器设置的数据区间长度+开始位置的数据  </li>
+<li>如果只发送结束位置，结束位置参数可以被描述成从最后一个可用的字节算起可以被服务器返回的字节数  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 206 Partial Content</span><br><span class="line">Content-Type: video&#x2F;mp4</span><br><span class="line">Content-Range: bytes 0-3145729&#x2F;24332262</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Content-Length: 3145729</span><br><span class="line">Connection: keep-alive</span><br></pre></td></tr></table></figure>
+<h3 id="Content-Range：字节数（bytes）-开始-结束-总长度"><a href="#Content-Range：字节数（bytes）-开始-结束-总长度" class="headerlink" title="Content-Range：字节数（bytes）=(开始)-(结束)/(总长度)"></a>Content-Range：字节数（bytes）=(开始)-(结束)/(总长度)</h3><p>服务器返回当前数据区间开始结束位置，文件总长度</p>
+<h3 id="Accept-Ranges-字节（bytes）"><a href="#Accept-Ranges-字节（bytes）" class="headerlink" title="Accept-Ranges: 字节（bytes）"></a>Accept-Ranges: 字节（bytes）</h3><p>声明数据存储单位 ，然而只能用bytes这一个单位</p>
+<h3 id="Content-Length-3145729"><a href="#Content-Length-3145729" class="headerlink" title="Content-Length: 3145729"></a>Content-Length: 3145729</h3><p>此次数据长度</p>
+<h2 id="koa-实现部分功能"><a href="#koa-实现部分功能" class="headerlink" title="koa 实现部分功能"></a>koa 实现部分功能</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 206 Partial Content</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@name <span class="variable">http206</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>ctx  object Koa Context</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>path  string 文件路径</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="variable">steam</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> http206 = <span class="keyword">async</span> (ctx,path) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> Range = ctx.request.get(<span class="string">'Range'</span>);</span><br><span class="line">    <span class="keyword">let</span> file = fs.statSync(path);</span><br><span class="line">    <span class="keyword">let</span> fileSize = file.size;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> parts = Range.replace(<span class="regexp">/bytes=/</span>, <span class="string">""</span>).split(<span class="string">"-"</span>);</span><br><span class="line">    <span class="keyword">let</span> start = parts[<span class="number">0</span>] ? <span class="built_in">Number</span>(parts[<span class="number">0</span>]) : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> end = parts[<span class="number">1</span>] ? <span class="built_in">Number</span>(parts[<span class="number">1</span>]) : start + <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">3</span>;   <span class="comment">//当请求字段Range结束位置为0时，这里长度为3mb</span></span><br><span class="line">    end = end &gt; fileSize - <span class="number">1</span> ? fileSize - <span class="number">1</span> : end;           <span class="comment">//当结束位置大于文件长度-1时，结束位置 = 文件长度 - 1</span></span><br><span class="line">    <span class="keyword">let</span> chunksize = (end - start) + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> headers = &#123;</span><br><span class="line">        <span class="string">'Content-Range'</span>: <span class="string">`bytes <span class="subst">$&#123;start&#125;</span>-<span class="subst">$&#123;end&#125;</span>/<span class="subst">$&#123;fileSize&#125;</span>`</span>,</span><br><span class="line">        <span class="string">'Accept-Ranges'</span>: <span class="string">'bytes'</span>,</span><br><span class="line">        <span class="string">'Content-Length'</span>: chunksize,</span><br><span class="line">        <span class="string">'Content-Type'</span>:  mime类型,</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//console.log(headers);</span></span><br><span class="line">    ctx.response.status = <span class="number">206</span>;</span><br><span class="line">    ctx.set(headers);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> fs.createReadStream(path,&#123;start,end&#125;)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://nworm.icu/pan/%E5%9B%BE%E7%89%87/http206.png" alt=""></p>
+
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/04/10/nodejs-http206/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-date">
+			<div class="post-month">04月</div>
+			<div class="post-day">06</div>
+	</div>
+  
+
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://nworm.icu/2020/04/06/Chinese-documents/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nworm">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/DIYgod.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nworm">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/06/Chinese-documents/" itemprop="url">各种语言的包,库,扩展的中文文档</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-06T15:00:00+08:00">
+                2020-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>慢慢记录咯</p>
+<h2 id="node-js"><a href="#node-js" class="headerlink" title="node.js"></a>node.js</h2><ul>
+<li>Sequelize v5: <a href="https://itbilu.com/nodejs/npm/sequelize-docs-v5.html" target="_blank" rel="noopener"></a></li>
+<li>winston: <a href="https://www.cnblogs.com/liuyinlei/p/6128984.html" target="_blank" rel="noopener"></a></li>
+<li>socket.io: <a href="http://www.shuaihuajun.com/article/1504749640971/" target="_blank" rel="noopener"></a></li>
+</ul>
+<h2 id="rust"><a href="#rust" class="headerlink" title="rust"></a>rust</h2><ul>
+<li>rust : <a href="https://www.gitbook.com/book/hltj/rust-book-chinese" target="_blank" rel="noopener"></a></li>
+</ul>
+
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/04/06/Chinese-documents/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-date">
 			<div class="post-month">03月</div>
 			<div class="post-day">24</div>
 	</div>
@@ -1413,7 +1695,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
