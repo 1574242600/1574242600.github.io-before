@@ -5,6 +5,7 @@ node_js: stable
 cache:
   directories:
   - node_modules
+  - themes/sagiri/node_modules
 
 before_install:
   - export TZ='Asia/Shanghai'
