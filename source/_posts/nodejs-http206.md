@@ -4,8 +4,9 @@ date: 2020-04-10 12:40:00
 tags: js
 ---
 
-cnm，为什么koa它不直接支持206  
+c，为什么koa它不直接支持206  
 
+<!--more-->
 ## 206 Partial Content 是个什么玩意？
 
 > HTTP 206 Partial Content 成功状态响应代码表示请求已成功，并且主体包含所请求的数据区间，该数据区间是在请求的 Range 首部指定的。
