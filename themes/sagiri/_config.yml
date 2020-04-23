@@ -254,7 +254,7 @@ font:
   enable: true
 
   # Uri of fonts host. E.g. //fonts.googleapis.com (Default).
-  host: //fonts.cat.net
+  host: //fonts.loli.net
 
   # Font options:
   # `external: true` will load this font family from `host` above.
