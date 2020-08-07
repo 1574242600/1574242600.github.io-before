@@ -30,9 +30,11 @@
         </li>
       {% endif %}
       <li class="menu-item search">
-          <%- search_form({
-            class: 'search-form',
-          }) %>
+          {{ 
+            search_form({
+              class: 'search-form',
+            }) 
+          }}
           <!--
             <form class="search-form">
               <input name="keyword" type="text" class="search-input" placeholder="站内搜索">
