@@ -121,7 +121,7 @@
 <meta property="og:description" content="c，为什么koa它不直接支持206">
 <meta property="og:image" content="https://nworm.icu/pan/%E5%9B%BE%E7%89%87/http206.png">
 <meta property="article:published_time" content="2020-04-10T04:40:00.000Z">
-<meta property="article:modified_time" content="2020-08-07T07:32:53.077Z">
+<meta property="article:modified_time" content="2020-08-07T07:55:16.276Z">
 <meta property="article:author" content="nworm">
 <meta property="article:tag" content="js">
 <meta name="twitter:card" content="summary">
@@ -495,7 +495,9 @@ const myTheme = {
     },
 }
     var gitment = new Gitment({
+        id: window.location.pathname,
         owner: '1574242600',
+        lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
         repo: '1574242600.github.io',
         oauth: {
             client_id: '3d44c23fd064713afe91',

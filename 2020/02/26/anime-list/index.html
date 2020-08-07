@@ -120,7 +120,7 @@
 <meta property="og:site_name" content="Nworm">
 <meta property="og:description" content="数据来源: 萌娘百科">
 <meta property="article:published_time" content="2020-02-26T07:01:00.000Z">
-<meta property="article:modified_time" content="2020-08-07T07:32:53.077Z">
+<meta property="article:modified_time" content="2020-08-07T07:55:16.276Z">
 <meta property="article:author" content="nworm">
 <meta property="article:tag" content="json">
 <meta name="twitter:card" content="summary">
@@ -473,7 +473,9 @@ const myTheme = {
     },
 }
     var gitment = new Gitment({
+        id: window.location.pathname,
         owner: '1574242600',
+        lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
         repo: '1574242600.github.io',
         oauth: {
             client_id: '3d44c23fd064713afe91',
