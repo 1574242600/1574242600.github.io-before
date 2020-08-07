@@ -2,80 +2,112 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://nworm.icu/2020/01/30/js-/</loc>
-    
-    <lastmod>2020-07-24T11:14:50.637Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nworm.icu/2020/04/10/nodejs-http206/</loc>
-    
-    <lastmod>2020-07-24T11:14:50.637Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nworm.icu/2019/12/25/php-/</loc>
-    
-    <lastmod>2020-07-24T11:14:50.637Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nworm.icu/2020/01/13/php-bil/</loc>
-    
-    <lastmod>2020-07-24T11:14:50.637Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nworm.icu/2020/03/24/php-bvhao/</loc>
-    
-    <lastmod>2020-07-24T11:14:50.637Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nworm.icu/2019/07/25/php-glob/</loc>
-    
-    <lastmod>2020-07-24T11:14:50.637Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nworm.icu/2020/07/24/sang/</loc>
-    
-    <lastmod>2020-07-24T11:14:50.637Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://nworm.icu/2020/02/26/anime-list/</loc>
-    
-    <lastmod>2020-07-24T11:14:50.637Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://nworm.icu/2019/07/18/0/</loc>
     
-    <lastmod>2020-07-24T11:14:50.633Z</lastmod>
+    <lastmod>2020-08-07</lastmod>
     
   </url>
   
   <url>
     <loc>https://nworm.icu/2020/02/13/1/</loc>
     
-    <lastmod>2020-07-24T11:14:50.633Z</lastmod>
+    <lastmod>2020-08-07</lastmod>
     
   </url>
   
   <url>
     <loc>https://nworm.icu/2020/04/06/Chinese-documents/</loc>
     
-    <lastmod>2020-07-24T11:14:50.633Z</lastmod>
+    <lastmod>2020-08-07</lastmod>
     
   </url>
+  
+  <url>
+    <loc>https://nworm.icu/2020/01/30/js-/</loc>
+    
+    <lastmod>2020-08-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nworm.icu/2020/04/10/nodejs-http206/</loc>
+    
+    <lastmod>2020-08-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nworm.icu/2019/12/25/php-/</loc>
+    
+    <lastmod>2020-08-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nworm.icu/2020/01/13/php-bil/</loc>
+    
+    <lastmod>2020-08-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nworm.icu/2020/03/24/php-bvhao/</loc>
+    
+    <lastmod>2020-08-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nworm.icu/2019/07/25/php-glob/</loc>
+    
+    <lastmod>2020-08-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nworm.icu/2020/07/24/sang/</loc>
+    
+    <lastmod>2020-08-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://nworm.icu/2020/02/26/anime-list/</loc>
+    
+    <lastmod>2020-08-07</lastmod>
+    
+  </url>
+  
+
+  <url>
+    <loc>https://nworm.icu/</loc>
+    <lastmod>2020-08-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  
+  <url>
+    <loc>https://nworm.icu/tags/js/</loc>
+    <lastmod>2020-08-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nworm.icu/tags/php/</loc>
+    <lastmod>2020-08-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://nworm.icu/tags/json/</loc>
+    <lastmod>2020-08-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+
   
 </urlset>
