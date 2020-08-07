@@ -35,12 +35,13 @@
               class: 'search-form',
             }) 
           }}
-          <!--
-            <form class="search-form">
-              <input name="keyword" type="text" class="search-input" placeholder="站内搜索">
-              <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
-            </form>
-          -->
+
+           <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form">
+             <input type="search" name="q" class="search-form-input" placeholder="Search">
+             <input type="hidden" name="sitesearch" value="{{config.url}}">
+             <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
+          </form>
+
       </li>
     </ul>
   {% endif %}
