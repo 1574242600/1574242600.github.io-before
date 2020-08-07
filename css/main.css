@@ -1795,7 +1795,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #06253b;
+  background: #ff4;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3311,7 +3311,7 @@ a {
   padding: 3px 7px;
   width: 100px;
 }
-.menu .menu-item.search .search-form-input {
+.menu .menu-item.search .search-input {
   border: none;
   border-radius: 2px;
   color: #555;
