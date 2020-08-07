@@ -121,7 +121,7 @@
 <meta property="og:description" content="图作者: @HamsterFragment">
 <meta property="og:image" content="https://nworm.icu/pan/%E5%9B%BE%E7%89%87/sang.jpg">
 <meta property="article:published_time" content="2020-07-24T08:57:00.000Z">
-<meta property="article:modified_time" content="2020-08-07T06:54:31.560Z">
+<meta property="article:modified_time" content="2020-08-07T07:04:14.981Z">
 <meta property="article:author" content="nworm">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://nworm.icu/pan/%E5%9B%BE%E7%89%87/sang.jpg">
@@ -256,10 +256,15 @@
 
       
       <li class="menu-item search">
-          <form class="search-form">
-            <input name="keyword" type="text" class="search-input" placeholder="站内搜索">
-            <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
-          </form>
+          <%- search_form({
+            class: 'search-form',
+          }) %>
+          <!--
+            <form class="search-form">
+              <input name="keyword" type="text" class="search-input" placeholder="站内搜索">
+              <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
+            </form>
+          -->
       </li>
     </ul>
   
