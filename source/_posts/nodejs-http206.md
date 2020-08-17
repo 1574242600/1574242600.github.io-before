@@ -73,7 +73,8 @@ const http206 = async (ctx,path) => {
 
     let parts = Range.replace(/bytes=/, "").split("-");
     let start = parts[0] ? Number(parts[0]) : 0;
-    let end = parts[1] ? Number(parts[1]) : start + 1024 * 1024 * 3;   //当请求字段Range结束位置为0时，这里长度为3mb
+    //当请求字段Range结束位置为0时，这里长度为3mb,请根据需要调整
+    let end = parts[1] ? Number(parts[1]) : start + 1024 * 1024 * 3;  
     end = end > fileSize - 1 ? fileSize - 1 : end;           //当结束位置大于文件长度-1时，结束位置 = 文件长度 - 1
     let chunksize = (end - start) + 1;
 
@@ -87,7 +88,7 @@ const http206 = async (ctx,path) => {
     //console.log(headers);
     ctx.response.status = 206;
     ctx.set(headers);
-
+    //请根据需要处理异常
     return fs.createReadStream(path,{start,end})
 };
 ```
