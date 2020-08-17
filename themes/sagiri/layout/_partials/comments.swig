@@ -20,7 +20,9 @@ const myTheme = {
     },
 }
     var gitment = new Gitment({
+        id: window.location.pathname,
         owner: '1574242600',
+        lang: "{{ theme.gitment.language }}" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
         repo: '1574242600.github.io',
         oauth: {
             client_id: '3d44c23fd064713afe91',
